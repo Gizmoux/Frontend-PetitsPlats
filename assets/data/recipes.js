@@ -1828,27 +1828,3 @@ const recipes = [
 // ];
 export default recipes;
 
-// function dropdown() {
-// 	const buttonFilters = document.querySelectorAll('.button-filter');
-// 	buttonFilters.forEach(button => {
-// 		const chevronIcon = button.querySelector('.fas.fa-chevron-down');
-// 		const chevronIconUp = button.querySelector('.fas.fa-chevron-up');
-// 		const dropdownContent = button.querySelector('.dropdown_content');
-
-// 		chevronIcon.addEventListener('click', () => {
-// 			// Toggle la classe pour afficher ou cacher les options
-// 			chevronIconUp.style.display = 'inline-block';
-// 			chevronIcon.style.display = 'none';
-// 			dropdownContent.classList.toggle('show-options');
-// 			console.log("J'ai cliquer sur le chevron down");
-// 		});
-// 		chevronIconUp.addEventListener('click', () => {
-// 			// Toggle la classe pour afficher ou cacher les options
-// 			chevronIconUp.style.display = 'none';
-// 			chevronIcon.style.display = 'inline-block';
-// 			dropdownContent.classList.toggle('show-options');
-// 			console.log("J'ai cliquer sur le chevron up");
-// 		});
-// 	});
-// }
-// dropdown();

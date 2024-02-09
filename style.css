@@ -46,16 +46,17 @@
 }
 .dropdown_content li {
 	position: relative;
-	width: 150px;
+
 	z-index: 1;
 	max-height: calc(1.2em * 10);
-	overflow: scroll;
+	overflow: overlay;
 	text-overflow: ellipsis;
 }
 
 .dropdown_content.show-options {
-	background-color: lightgreen;
+	/* background-color: lightgreen; */
 	display: flex;
+	height: 200px;
 }
 
 .fas.fa-chevron-up {
