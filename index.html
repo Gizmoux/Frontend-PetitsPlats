@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="./style.css" rel="stylesheet" />
+		<script type="module" src="./index.js"></script>
+		<script
+			src="https://kit.fontawesome.com/25a6e78e8b.js"
+			crossorigin="anonymous"
+		></script>
+		<title>LES PETITS PLATS</title>
+	</head>
+	<body>
+		<header>
+			<img
+				src="./assets/images/Logo.png"
+				alt="Logo Les petits plats"
+				class="logo"
+			/>
+
+			<div>
+				<img
+					src="./assets/images/headerimage.png"
+					class="header-image"
+					alt="Photo d'un plat asiatique"
+				/>
+				<div class="search-content">
+					<h1>
+						CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN, SIMPLES ET
+						DÉLICIEUSES
+					</h1>
+					<div>
+						<input
+							type="text"
+							placeholder="Rechercher une recette, un ingrédient,..."
+						/>
+						<img src="./assets/images/loop.png" alt="Bouton rechercher" />
+					</div>
+				</div>
+			</div>
+		</header>
+		<div class="container">
+			<div class="filter">
+				<div>
+					<button class="button-filter" type="button">
+						<span>Ingrédients</span>
+						<i class="fas fa-chevron-down"></i>
+						<i class="fas fa-chevron-up"></i>
+					</button>
+
+					<ul class="dropdown_content">
+						<input type="text" />
+						<li class="menu-item-ingredients"></li>
+					</ul>
+				</div>
+				<div>
+					<button class="button-filter" type="button">
+						<span>Appareils</span>
+						<i class="fas fa-chevron-down"></i>
+						<i class="fas fa-chevron-up"></i>
+					</button>
+					<ul class="dropdown_content">
+						<input type="text" />
+						<li class="menu-item-appliance">Appareils</li>
+					</ul>
+				</div>
+				<div>
+					<button class="button-filter" type="button">
+						<span>Ustensiles</span>
+						<i class="fas fa-chevron-down"></i>
+						<i class="fas fa-chevron-up"></i>
+					</button>
+					<ul class="dropdown_content">
+						<input type="text" />
+						<li class="menu-item-ustensils">Ustensils</li>
+					</ul>
+				</div>
+			</div>
+			<div>
+				<div class="card-menu"></div>
+			</div>
+		</div>
+	</body>
+</html>
