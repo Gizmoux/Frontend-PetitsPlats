@@ -114,12 +114,19 @@
 }
 .menuIngredientLi:hover {
 	background-color: #fdd15b;
+	cursor: pointer;
 }
 .menuApplianceLi:hover {
 	background-color: #fdd15b;
+	cursor: pointer;
 }
 .menuUstensilsLi:hover {
+	cursor: pointer;
 	background-color: #fdd15b;
+}
+.spanList {
+	background-color: #fdd15b;
+	text-decoration: none;
 }
 /* MOBILE */
 /* TABLET */

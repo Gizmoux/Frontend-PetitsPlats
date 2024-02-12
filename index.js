@@ -31,6 +31,8 @@ let tabUstensils = [];
 const menuItemIngredients = document.querySelector('.menu-item-ingredients');
 const menuItemAppliance = document.querySelector('.menu-item-appliance');
 const menuItemUstensils = document.querySelector('.menu-item-ustensils');
+
+// Fonction réutilisable sur les autres filtres
 const updateFilter = (inputElement, targetElement, ingredients) => {
 	inputElement.addEventListener('input', event => {
 		let value = event.target.value.toLowerCase();
@@ -45,8 +47,15 @@ const updateFilter = (inputElement, targetElement, ingredients) => {
 			menuIngredientLi.classList.add('menuIngredientLi');
 			menuIngredientLi.textContent = ingredient;
 			targetElement.appendChild(menuIngredientLi);
-		});
 
+			menuIngredientLi.addEventListener('click', event => {
+				const spanList = document.querySelector('.spanList');
+				spanList.appendChild(menuIngredientLi);
+				// let clickFilter = menuIngredientLi.filter()
+				// Il faut que menuIngredientLi doit inclu dans
+				console.log('je clique sur une liste Résultat');
+			});
+		});
 		// console.log('value', value);
 	});
 };
@@ -60,7 +69,7 @@ recipes.forEach(recipe => {
 		menuItemIngredients.appendChild(menuIngredientLi);
 		// console.log('menuIngredientLi', menuIngredientLi);
 
-		console.log('menuItemAppliance', menuItemAppliance);
+		// console.log('menuItemAppliance', menuItemAppliance);
 		// console.log('menuIngredientLi.innerHTML', menuIngredientLi);
 		tabIngredient.push(menuIngredientLi.textContent); // Stocker les noms des ingrédients ds le tabIngredient
 	});
@@ -78,7 +87,7 @@ recipes.forEach(recipe => {
 	tabAppliance.push(menuApplianceLi.textContent);
 	// console.log('recipe.appliance', recipe.appliance);
 	// console.log('menuItemAppliance', menuItemAppliance);
-	console.log('tabAppliance', tabAppliance);
+	// console.log('tabAppliance', tabAppliance);
 });
 updateFilter(inputAppliance, menuItemAppliance, tabAppliance);
 
