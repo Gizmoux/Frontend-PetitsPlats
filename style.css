@@ -114,7 +114,7 @@ body {
 .filter {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	/* align-items: center; */
 	margin-left: 2%;
 }
 .fa-chevron-up {
@@ -177,7 +177,7 @@ body {
 	padding: 5px 10px;
 	border-radius: 40px;
 }
-.menuElementLi:hover {
+.menuIngredientLi:hover {
 	background-color: #fdd15b;
 	cursor: pointer;
 }
@@ -186,6 +186,18 @@ body {
 	cursor: pointer;
 }
 .menuUstensilsLi:hover {
+	cursor: pointer;
+	background-color: #fdd15b;
+}
+.filteredListUstensils {
+	cursor: pointer;
+	background-color: #fdd15b;
+}
+.filteredListAppliance {
+	cursor: pointer;
+	background-color: #fdd15b;
+}
+.filteredListIngredients {
 	cursor: pointer;
 	background-color: #fdd15b;
 }
