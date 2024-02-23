@@ -144,12 +144,13 @@ body {
 	display: grid;
 	/* max-width: 1440px; */
 	column-gap: 50px;
+	row-gap: 35px;
 	margin: 0px 25px 0px 25px;
 	grid-template-columns: repeat(3, 1fr);
 	border-radius: 15px;
 }
 .card-recipe {
-	/* background-color: red; */
+	background-color: white;
 	display: grid;
 	position: relative;
 	width: 100%;
@@ -189,29 +190,25 @@ body {
 	cursor: pointer;
 	background-color: #fdd15b;
 }
-.filteredListUstensils {
+.filteredListUstensils:hover {
 	cursor: pointer;
 	background-color: #fdd15b;
 }
-.filteredListAppliance {
+.filteredListAppliance:hover {
 	cursor: pointer;
 	background-color: #fdd15b;
 }
-.filteredListIngredients {
+.filteredListIngredients:hover {
 	cursor: pointer;
-	background-color: #fdd15b;
+	background-color: red;
 }
-.spanList {
-	display: flex;
-	flex-direction: row;
-	/* overflow-x: scroll; */
-}
-.spanList .menuElementLi {
+
+.paraList span {
 	background-color: #fdd15b;
+	cursor: pointer;
 	margin: 10px;
 	padding: 10px;
 	border-radius: 10px;
-	max-width: 1440px;
 	list-style-type: none;
 }
 

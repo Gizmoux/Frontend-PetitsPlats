@@ -384,332 +384,333 @@ const recipes = [
 		appliance: 'Four',
 		ustensils: ['plat à gratin', 'couteau', 'Économe'],
 	},
+
+	{
+		id: 11,
+		image: 'Recette11.jpg',
+		name: 'Salade tomate, mozzarella et pommes',
+		servings: 4,
+		ingredients: [
+			{
+				ingredient: 'Tomates cerises',
+				quantity: 250,
+				unit: 'grammes',
+			},
+			{
+				ingredient: 'Mozzarella',
+				quantity: 150,
+				unit: 'grammes',
+			},
+			{
+				ingredient: 'Jambon de parme',
+				quantity: 4,
+				unit: 'tranches',
+			},
+			{
+				ingredient: 'Pommes',
+				quantity: 1,
+			},
+			{
+				ingredient: 'Salade Verte',
+				quantity: 1,
+			},
+			{
+				ingredient: 'Vinaigrette',
+				quantity: 5,
+				unit: 'cl',
+			},
+		],
+		time: 10,
+		description:
+			'Commencer par couper les feuilles de salade, ajouter les tomates cerises et le fromage découpé en cubes ou en boules avec la cuillère à melon. Découper le jambon de parme en fines lamelles. Ajouter la pomme elle aussi découpée en petit morceaux. Assaisonnez à votre gout. ',
+		appliance: 'Saladier',
+		ustensils: ['couteau', 'cuillère à melon'],
+	},
+	{
+		id: 12,
+		image: 'Recette12.jpg',
+		name: 'Compote pomme rhubarbe',
+		servings: 4,
+		ingredients: [
+			{
+				ingredient: 'Rhubarbe',
+				quantity: 160,
+				unit: 'grammes',
+			},
+			{
+				ingredient: 'Pommes',
+				quantity: 8,
+			},
+			{
+				ingredient: 'Sucre vanillé',
+				quantity: 6,
+				unit: 'sachets',
+			},
+			{
+				ingredient: 'Eau',
+				quantity: '0.5',
+				unit: 'tasses',
+			},
+		],
+		time: 40,
+		description:
+			"Éplucher les fruits et les couper en morceaux, les mettre dans une casserole en ajoutant l'eau et le sucre vanillé. Laisser cuire 15 minutes en remuant régulièrement.",
+		appliance: 'Casserole',
+		ustensils: ['couteau', 'économe'],
+	},
+	{
+		id: 13,
+		image: 'Recette13.jpg',
+		name: 'Salade mâchée de patates',
+		servings: 2,
+		ingredients: [
+			{
+				ingredient: 'Mâche',
+				quantity: 60,
+				unit: 'grammes',
+			},
+			{
+				ingredient: 'Pommes de terre',
+				quantity: 200,
+				unit: 'grammes',
+			},
+			{
+				ingredient: 'Échalote',
+				quantity: 2,
+			},
+			{
+				ingredient: 'Vinaigre de cidre',
+				quantity: 1,
+				unit: 'cuillère à soupe',
+			},
+			{
+				ingredient: "huile d'olive",
+				quantity: 2,
+				unit: 'cuillère à soupe',
+			},
+		],
+		time: 40,
+		description:
+			"Cuire les pommes de terre environ 30 minutes. Découper les échalotes finement. Durant la cuisson des pommes de terre. Préparez la vinaigrette avec l'huile d'olive et le vinaigre de cidre. Salez poivrez à discrétion. Dans un saladier, mettre le mâche. Ajouter",
+		appliance: 'Casserole',
+		ustensils: ['couteau', 'saladier', 'cuillère en bois'],
+	},
+	{
+		id: 14,
+		image: 'Recette14.jpg',
+		name: 'Galette Bretonne Saucisse et Fromage à raclette',
+		servings: 2,
+		ingredients: [
+			{
+				ingredient: 'Saucisse bretonne ou de Toulouse',
+				quantity: 2,
+			},
+			{
+				ingredient: 'Farine de blé noir',
+				quantity: 130,
+				unit: 'grammes',
+			},
+			{
+				ingredient: 'Oeuf',
+				quantity: 1,
+			},
+			{
+				ingredient: 'Fromage à raclette',
+				quantity: 300,
+				unit: 'grammes',
+			},
+			{
+				ingredient: 'Oignon',
+				quantity: 1,
+			},
+			{
+				ingredient: 'Beurre',
+				quantity: 75,
+				unit: 'grammes',
+			},
+		],
+		time: 100,
+		description:
+			"Mélanger la farine et les oeufs, faire fondre 25 grammes de beurre et ajouter à la pâte. Ajouter du sel. Laisser reposer 1 heure. Faire les galettes et laisser refroidir. Faire chauffer les saucisses avec du beurre et l'oignon. Enrouler les saucisses dans les crêpes avec une partie du fromage. Mettre le reste du fromage à raclette par dessus les crêpes. Passer four pendant 20 minutes",
+		appliance: 'Four',
+		ustensils: ['poêle à frire', 'couteau'],
+	},
+	{
+		id: 15,
+		image: 'Recette15.jpg',
+		name: 'Crêpes Chocolat Banane',
+		servings: 10,
+		ingredients: [
+			{
+				ingredient: 'Oeuf',
+				quantity: 3,
+			},
+			{
+				ingredient: 'Farine',
+				quantity: 250,
+				unit: 'grammes',
+			},
+			{
+				ingredient: 'Lait',
+				quantity: 600,
+				unit: 'ml',
+			},
+			{
+				ingredient: 'Beurre salé',
+				quantity: 30,
+				unit: 'grammes',
+			},
+			{
+				ingredient: 'Chocolat au lait',
+				quantity: 100,
+				unit: 'grammes',
+			},
+			{
+				ingredient: 'Banane',
+				quantity: 4,
+			},
+		],
+		time: 60,
+		description:
+			"Mélangez dans un saladier, la farine, les oeufs, et le lait. Battez jusqu'à avoir une masse homogène. Pendant ce temps faites fondre le beurre et ajoutez en une partie à la pâte à crêpes. Faire fondre le chocolat ( avec le reste du beurre salé ). Lorsque vous chauffez les crêpes. Ajouter le chocolat fondu et les bananes coupées en rondelles. Ajoutez une touche de chantilly pour les gourmands",
+		appliance: 'Poêle à crêpe',
+		ustensils: ['saladier', 'louche', 'cuillère en bois'],
+	},
+	{
+		id: 16,
+		image: 'Recette16.jpg',
+		name: 'Gratin de pâtes à la tomate',
+		servings: 2,
+		ingredients: [
+			{
+				ingredient: 'Tomate',
+				quantity: 500,
+				unit: 'grammes',
+			},
+			{
+				ingredient: 'Mozzarella',
+				quantity: 250,
+				unit: 'grammes',
+			},
+			{
+				ingredient: 'Pennes',
+				quantity: 500,
+				unit: 'grammes',
+			},
+			{
+				ingredient: 'Basilic',
+				quantity: 1,
+				unit: 'tiges',
+			},
+			{
+				ingredient: "huile d'olives",
+				quantity: 2,
+				unit: 'cuillère à soupe',
+			},
+		],
+		time: 45,
+		description:
+			"Faire cuire les pâtes si vous n'avez pas de pennes des coquillettes peuvent faire l'affaire. Découper les tomates en petits morceaux, soit en tranches soit en dés. Coupez le basilic en petites morceaux et mélangez le aux tomates.  Coupez la mozzarella en tranche. Préchauffez le four à 200°. Alternez entre couches de pattes et couches de tomates, terminez par une couche de pates et recouvrir du fromage. Laisser au four 30 minutes et régalez vous ! Une recette simple qui fera plaisir au petits comme aux grands.",
+		appliance: 'Four',
+		ustensils: ['plat à gratin', 'couteau', 'râpe à fromage'],
+	},
+	{
+		id: 17,
+		image: 'Recette17.jpg',
+		name: 'Smoothie à la fraise',
+		servings: 6,
+		ingredients: [
+			{
+				ingredient: 'Fraise',
+				quantity: 500,
+				unit: 'grammes',
+			},
+			{
+				ingredient: 'Pastèque',
+				quantity: 0.5,
+			},
+			{
+				ingredient: 'Jus de citron',
+				quantity: 1,
+				unit: 'cuillères à soupe',
+			},
+			{
+				ingredient: 'Glaçons',
+				quantity: 8,
+			},
+			{
+				ingredient: 'Menthe',
+			},
+		],
+		time: 15,
+		description:
+			'Coupez les fraises en morceaux, découpez la chaire de la pastèque en retirant les pépins. Mettre le tout dans le blender. Ajouter un cuillère à soupe de juste de citron ainsi que les glaçons. Ajoutez quelques feuilles de menthe pour plus de fraîcheur. Mixez le tout. Servir et déguster.',
+		appliance: 'Blender',
+		ustensils: ['verres', 'couteau', 'presse citron'],
+	},
+	{
+		id: 18,
+		image: 'Recette18.jpg',
+		name: 'Smoothie ananas et vanille',
+		servings: 5,
+		ingredients: [
+			{
+				ingredient: 'Ananas',
+				quantity: 1,
+			},
+			{
+				ingredient: 'Glace à la vanille',
+				quantity: 500,
+				unit: 'ml',
+			},
+			{
+				ingredient: 'Lait',
+				quantity: 50,
+				unit: 'cl',
+			},
+		],
+		time: 10,
+		description:
+			"Séparez 1/5ème d'Ananas ( une belle tranche qui servira pour la décoration des verres ), mettre le reste coupé en cubes au blender, ajouter la glace à la vanille et le lait. Mixez. Servir et décorer avec l'ananas restant. C'est prêt",
+		appliance: 'Blender',
+		ustensils: ['verres', 'couteau'],
+	},
+	{
+		id: 19,
+		image: 'Recette19.jpg',
+		name: 'Shake Banane Kiwi',
+		servings: 4,
+		ingredients: [
+			{
+				ingredient: 'Kiwi',
+				quantity: 4,
+			},
+			{
+				ingredient: 'Citron',
+				quantity: 1,
+			},
+			{
+				ingredient: 'Lait',
+				quantity: 1,
+				unit: 'litres',
+			},
+			{
+				ingredient: 'Sucre glace',
+				quantity: 30,
+				unit: 'grammes',
+			},
+			{
+				ingredient: 'Banane',
+				quantity: 1,
+			},
+		],
+		time: 0,
+		description:
+			"Coupez les fruits en morceaux, ajouter le jus de citron et le lait ainsi que le sucre glace. Mixez. Ajoutez des glaçons si le lait n'a pas été mis au frais.",
+		appliance: 'Blender',
+		ustensils: ['couteau', 'verres', 'presse citron'],
+	},
 ];
-// 	{
-// 		id: 11,
-// 		image: 'Recette11.jpg',
-// 		name: 'Salade tomate, mozzarella et pommes',
-// 		servings: 4,
-// 		ingredients: [
-// 			{
-// 				ingredient: 'Tomates cerises',
-// 				quantity: 250,
-// 				unit: 'grammes',
-// 			},
-// 			{
-// 				ingredient: 'Mozzarella',
-// 				quantity: 150,
-// 				unit: 'grammes',
-// 			},
-// 			{
-// 				ingredient: 'Jambon de parme',
-// 				quantity: 4,
-// 				unit: 'tranches',
-// 			},
-// 			{
-// 				ingredient: 'Pommes',
-// 				quantity: 1,
-// 			},
-// 			{
-// 				ingredient: 'Salade Verte',
-// 				quantity: 1,
-// 			},
-// 			{
-// 				ingredient: 'Vinaigrette',
-// 				quantity: 5,
-// 				unit: 'cl',
-// 			},
-// 		],
-// 		time: 10,
-// 		description:
-// 			'Commencer par couper les feuilles de salade, ajouter les tomates cerises et le fromage découpé en cubes ou en boules avec la cuillère à melon. Découper le jambon de parme en fines lamelles. Ajouter la pomme elle aussi découpée en petit morceaux. Assaisonnez à votre gout. ',
-// 		appliance: 'Saladier',
-// 		ustensils: ['couteau', 'cuillère à melon'],
-// 	},
-// 	{
-// 		id: 12,
-// 		image: 'Recette12.jpg',
-// 		name: 'Compote pomme rhubarbe',
-// 		servings: 4,
-// 		ingredients: [
-// 			{
-// 				ingredient: 'Rhubarbe',
-// 				quantity: 160,
-// 				unit: 'grammes',
-// 			},
-// 			{
-// 				ingredient: 'Pommes',
-// 				quantity: 8,
-// 			},
-// 			{
-// 				ingredient: 'Sucre vanillé',
-// 				quantity: 6,
-// 				unit: 'sachets',
-// 			},
-// 			{
-// 				ingredient: 'Eau',
-// 				quantity: '0.5',
-// 				unit: 'tasses',
-// 			},
-// 		],
-// 		time: 40,
-// 		description:
-// 			"Éplucher les fruits et les couper en morceaux, les mettre dans une casserole en ajoutant l'eau et le sucre vanillé. Laisser cuire 15 minutes en remuant régulièrement.",
-// 		appliance: 'Casserole',
-// 		ustensils: ['couteau', 'économe'],
-// 	},
-// 	{
-// 		id: 13,
-// 		image: 'Recette13.jpg',
-// 		name: 'Salade mâchée de patates',
-// 		servings: 2,
-// 		ingredients: [
-// 			{
-// 				ingredient: 'Mâche',
-// 				quantity: 60,
-// 				unit: 'grammes',
-// 			},
-// 			{
-// 				ingredient: 'Pommes de terre',
-// 				quantity: 200,
-// 				unit: 'grammes',
-// 			},
-// 			{
-// 				ingredient: 'Échalote',
-// 				quantity: 2,
-// 			},
-// 			{
-// 				ingredient: 'Vinaigre de cidre',
-// 				quantity: 1,
-// 				unit: 'cuillère à soupe',
-// 			},
-// 			{
-// 				ingredient: "huile d'olive",
-// 				quantity: 2,
-// 				unit: 'cuillère à soupe',
-// 			},
-// 		],
-// 		time: 40,
-// 		description:
-// 			"Cuire les pommes de terre environ 30 minutes. Découper les échalotes finement. Durant la cuisson des pommes de terre. Préparez la vinaigrette avec l'huile d'olive et le vinaigre de cidre. Salez poivrez à discrétion. Dans un saladier, mettre le mâche. Ajouter",
-// 		appliance: 'Casserole',
-// 		ustensils: ['couteau', 'saladier', 'cuillère en bois'],
-// 	},
-// 	{
-// 		id: 14,
-// 		image: 'Recette14.jpg',
-// 		name: 'Galette Bretonne Saucisse et Fromage à raclette',
-// 		servings: 2,
-// 		ingredients: [
-// 			{
-// 				ingredient: 'Saucisse bretonne ou de Toulouse',
-// 				quantity: 2,
-// 			},
-// 			{
-// 				ingredient: 'Farine de blé noir',
-// 				quantity: 130,
-// 				unit: 'grammes',
-// 			},
-// 			{
-// 				ingredient: 'Oeuf',
-// 				quantity: 1,
-// 			},
-// 			{
-// 				ingredient: 'Fromage à raclette',
-// 				quantity: 300,
-// 				unit: 'grammes',
-// 			},
-// 			{
-// 				ingredient: 'Oignon',
-// 				quantity: 1,
-// 			},
-// 			{
-// 				ingredient: 'Beurre',
-// 				quantity: 75,
-// 				unit: 'grammes',
-// 			},
-// 		],
-// 		time: 100,
-// 		description:
-// 			"Mélanger la farine et les oeufs, faire fondre 25 grammes de beurre et ajouter à la pâte. Ajouter du sel. Laisser reposer 1 heure. Faire les galettes et laisser refroidir. Faire chauffer les saucisses avec du beurre et l'oignon. Enrouler les saucisses dans les crêpes avec une partie du fromage. Mettre le reste du fromage à raclette par dessus les crêpes. Passer four pendant 20 minutes",
-// 		appliance: 'Four',
-// 		ustensils: ['poêle à frire', 'couteau'],
-// 	},
-// 	{
-// 		id: 15,
-// 		image: 'Recette15.jpg',
-// 		name: 'Crêpes Chocolat Banane',
-// 		servings: 10,
-// 		ingredients: [
-// 			{
-// 				ingredient: 'Oeuf',
-// 				quantity: 3,
-// 			},
-// 			{
-// 				ingredient: 'Farine',
-// 				quantity: 250,
-// 				unit: 'grammes',
-// 			},
-// 			{
-// 				ingredient: 'Lait',
-// 				quantity: 600,
-// 				unit: 'ml',
-// 			},
-// 			{
-// 				ingredient: 'Beurre salé',
-// 				quantity: 30,
-// 				unit: 'grammes',
-// 			},
-// 			{
-// 				ingredient: 'Chocolat au lait',
-// 				quantity: 100,
-// 				unit: 'grammes',
-// 			},
-// 			{
-// 				ingredient: 'Banane',
-// 				quantity: 4,
-// 			},
-// 		],
-// 		time: 60,
-// 		description:
-// 			"Mélangez dans un saladier, la farine, les oeufs, et le lait. Battez jusqu'à avoir une masse homogène. Pendant ce temps faites fondre le beurre et ajoutez en une partie à la pâte à crêpes. Faire fondre le chocolat ( avec le reste du beurre salé ). Lorsque vous chauffez les crêpes. Ajouter le chocolat fondu et les bananes coupées en rondelles. Ajoutez une touche de chantilly pour les gourmands",
-// 		appliance: 'Poêle à crêpe',
-// 		ustensils: ['saladier', 'louche', 'cuillère en bois'],
-// 	},
-// 	{
-// 		id: 16,
-// 		image: 'Recette16.jpg',
-// 		name: 'Gratin de pâtes à la tomate',
-// 		servings: 2,
-// 		ingredients: [
-// 			{
-// 				ingredient: 'Tomate',
-// 				quantity: 500,
-// 				unit: 'grammes',
-// 			},
-// 			{
-// 				ingredient: 'Mozzarella',
-// 				quantity: 250,
-// 				unit: 'grammes',
-// 			},
-// 			{
-// 				ingredient: 'Pennes',
-// 				quantity: 500,
-// 				unit: 'grammes',
-// 			},
-// 			{
-// 				ingredient: 'Basilic',
-// 				quantity: 1,
-// 				unit: 'tiges',
-// 			},
-// 			{
-// 				ingredient: "huile d'olives",
-// 				quantity: 2,
-// 				unit: 'cuillère à soupe',
-// 			},
-// 		],
-// 		time: 45,
-// 		description:
-// 			"Faire cuire les pâtes si vous n'avez pas de pennes des coquillettes peuvent faire l'affaire. Découper les tomates en petits morceaux, soit en tranches soit en dés. Coupez le basilic en petites morceaux et mélangez le aux tomates.  Coupez la mozzarella en tranche. Préchauffez le four à 200°. Alternez entre couches de pattes et couches de tomates, terminez par une couche de pates et recouvrir du fromage. Laisser au four 30 minutes et régalez vous ! Une recette simple qui fera plaisir au petits comme aux grands.",
-// 		appliance: 'Four',
-// 		ustensils: ['plat à gratin', 'couteau', 'râpe à fromage'],
-// 	},
-// 	{
-// 		id: 17,
-// 		image: 'Recette17.jpg',
-// 		name: 'Smoothie à la fraise',
-// 		servings: 6,
-// 		ingredients: [
-// 			{
-// 				ingredient: 'Fraise',
-// 				quantity: 500,
-// 				unit: 'grammes',
-// 			},
-// 			{
-// 				ingredient: 'Pastèque',
-// 				quantity: 0.5,
-// 			},
-// 			{
-// 				ingredient: 'Jus de citron',
-// 				quantity: 1,
-// 				unit: 'cuillères à soupe',
-// 			},
-// 			{
-// 				ingredient: 'Glaçons',
-// 				quantity: 8,
-// 			},
-// 			{
-// 				ingredient: 'Menthe',
-// 			},
-// 		],
-// 		time: 15,
-// 		description:
-// 			'Coupez les fraises en morceaux, découpez la chaire de la pastèque en retirant les pépins. Mettre le tout dans le blender. Ajouter un cuillère à soupe de juste de citron ainsi que les glaçons. Ajoutez quelques feuilles de menthe pour plus de fraîcheur. Mixez le tout. Servir et déguster.',
-// 		appliance: 'Blender',
-// 		ustensils: ['verres', 'couteau', 'presse citron'],
-// 	},
-// 	{
-// 		id: 18,
-// 		image: 'Recette18.jpg',
-// 		name: 'Smoothie ananas et vanille',
-// 		servings: 5,
-// 		ingredients: [
-// 			{
-// 				ingredient: 'Ananas',
-// 				quantity: 1,
-// 			},
-// 			{
-// 				ingredient: 'Glace à la vanille',
-// 				quantity: 500,
-// 				unit: 'ml',
-// 			},
-// 			{
-// 				ingredient: 'Lait',
-// 				quantity: 50,
-// 				unit: 'cl',
-// 			},
-// 		],
-// 		time: 10,
-// 		description:
-// 			"Séparez 1/5ème d'Ananas ( une belle tranche qui servira pour la décoration des verres ), mettre le reste coupé en cubes au blender, ajouter la glace à la vanille et le lait. Mixez. Servir et décorer avec l'ananas restant. C'est prêt",
-// 		appliance: 'Blender',
-// 		ustensils: ['verres', 'couteau'],
-// 	},
-// 	{
-// 		id: 19,
-// 		image: 'Recette19.jpg',
-// 		name: 'Shake Banane Kiwi',
-// 		servings: 4,
-// 		ingredients: [
-// 			{
-// 				ingredient: 'Kiwi',
-// 				quantity: 4,
-// 			},
-// 			{
-// 				ingredient: 'Citron',
-// 				quantity: 1,
-// 			},
-// 			{
-// 				ingredient: 'Lait',
-// 				quantity: 1,
-// 				unit: 'litres',
-// 			},
-// 			{
-// 				ingredient: 'Sucre glace',
-// 				quantity: 30,
-// 				unit: 'grammes',
-// 			},
-// 			{
-// 				ingredient: 'Banane',
-// 				quantity: 1,
-// 			},
-// 		],
-// 		time: 0,
-// 		description:
-// 			"Coupez les fruits en morceaux, ajouter le jus de citron et le lait ainsi que le sucre glace. Mixez. Ajoutez des glaçons si le lait n'a pas été mis au frais.",
-// 		appliance: 'Blender',
-// 		ustensils: ['couteau', 'verres', 'presse citron'],
-// 	},
 // 	{
 // 		id: 20,
 // 		image: 'Recette20.jpg',
@@ -1827,4 +1828,3 @@ const recipes = [
 // 	},
 // ];
 export default recipes;
-
