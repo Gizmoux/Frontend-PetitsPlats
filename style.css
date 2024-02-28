@@ -48,6 +48,13 @@ body {
 	top: 30%;
 	transform: translate(15%, 20%); */
 }
+.searchbar-content i {
+	display: none;
+	position: absolute;
+	color: grey;
+	cursor: pointer;
+	right: 12%;
+}
 .search-content h1 {
 	display: flex;
 	justify-content: center;
@@ -155,12 +162,16 @@ body {
 	position: relative;
 	width: 100%;
 }
+.divCardImage {
+	background-color: #ececec;
+	overflow: hidden;
+	height: 350px;
+}
 .card-menu-image {
 	border-top-right-radius: 15px;
 	border-top-left-radius: 15px;
 	width: 100%;
 	height: 350px;
-
 	object-fit: cover;
 }
 .recipe-description {
@@ -235,6 +246,11 @@ body {
 	margin-top: 5px;
 }
 
+#total-recipes {
+	font-family: 'Anton', sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
 /* MOBILE */
 @media (max-width: 768px) {
 	/* Pour les écrans de petite taille, une seule colonne */
