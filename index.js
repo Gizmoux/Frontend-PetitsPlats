@@ -41,55 +41,50 @@ searchBar.addEventListener('input', event => {
 
 	if (value.length > 3) {
 		emptyInput.style.display = 'block';
+		//! A compléter
 		emptyInput.addEventListener('click', () => {
 			let textInput = document.querySelector('.search-bar');
 			textInput.value = '';
 		});
-		// AVEC BOUCLE FOOOOOOOOOOOOOOOOOOOOOOOOOOOR AVEC BOUCLE FOOOOOOOOOOOOOOOOOOOOOOOOOOOR
-		// AVEC BOUCLE FOOOOOOOOOOOOOOOOOOOOOOOOOOOR AVEC BOUCLE FOOOOOOOOOOOOOOOOOOOOOOOOOOOR
-		// AVEC BOUCLE FOOOOOOOOOOOOOOOOOOOOOOOOOOOR AVEC BOUCLE FOOOOOOOOOOOOOOOOOOOOOOOOOOOR
-		// AVEC BOUCLE FOOOOOOOOOOOOOOOOOOOOOOOOOOOR AVEC BOUCLE FOOOOOOOOOOOOOOOOOOOOOOOOOOOR
-		// AVEC BOUCLE FOOOOOOOOOOOOOOOOOOOOOOOOOOOR AVEC BOUCLE FOOOOOOOOOOOOOOOOOOOOOOOOOOOR
-		// AVEC BOUCLE FOOOOOOOOOOOOOOOOOOOOOOOOOOOR AVEC BOUCLE FOOOOOOOOOOOOOOOOOOOOOOOOOOOR
 
-		// for (const recipe of recipes) {
-		// 	let isRecipeName = recipe.name.toLowerCase().trim();
-		// 	let isRecipeDescription = recipe.description.toLowerCase().trim();
-		// 	if (isRecipeName.includes(value) || isRecipeDescription.includes(value)) {
-		// 		console.log(isRecipeName);
-		// 		console.log(isRecipeDescription);
-		// 		return isRecipeName || isRecipeDescription;
-		// 	}
-		// 	for (let i = 0; i < recipe.ingredients.length; i++) {
-		// 		let isRecipeIngredient = recipe.ingredients[i].ingredient
-		// 			.toLowerCase()
-		// 			.trim();
-		// console.log('recipe.ingredients[i]', recipe.ingredients[i].ingredient);
-
-		// 		if (isRecipeIngredient.includes(value)) {
-		// 			console.log('ingredients[i]', isRecipeIngredient);
-		// 			return isRecipeIngredient;
-		// 		}
-		// 	}
-		// }}
-
-		// Je vais filtrer les recettes selon la saisie du User
-		let filteredRecipes = recipes.filter(recipe => {
-			// On vérifie si la saisie correspond à un nom de recette
+		//! AVEC BOUCLE FOR
+		let filteredRecipes = [];
+		for (const recipe of recipes) {
+			let isRecipeIngredient = false;
+			for (let i = 0; i < recipe.ingredients.length; i++) {
+				let ingredient = recipe.ingredients[i].ingredient.toLowerCase().trim();
+				if (ingredient.includes(value)) {
+					isRecipeIngredient = true;
+					break;
+				}
+			}
 			let isRecipeName = recipe.name.toLowerCase().trim().includes(value);
-			// On vérifie si la saisie correspond à un ingrédient
-			let isRecipeIngredient = recipe.ingredients.some(ingredient =>
-				ingredient.ingredient.toLowerCase().trim().includes(value)
-			);
-			// On vérifie si la saisie correspond à un mot de description
 			let isRecipeDescription = recipe.description
 				.toLowerCase()
 				.trim()
 				.includes(value);
-			// Retourner true si une des conditions matchent
 
-			return isRecipeName || isRecipeIngredient || isRecipeDescription;
-		});
+			if (isRecipeName || isRecipeDescription || isRecipeIngredient) {
+				filteredRecipes.push(recipe);
+			}
+		}
+		// Je vais filtrer les recettes selon la saisie du User
+		// let filteredRecipes = recipes.filter(recipe => {
+		// 	// On vérifie si la saisie correspond à un nom de recette
+		// 	let isRecipeName = recipe.name.toLowerCase().trim().includes(value);
+		// 	// On vérifie si la saisie correspond à un ingrédient
+		// 	let isRecipeIngredient = recipe.ingredients.some(ingredient =>
+		// 		ingredient.ingredient.toLowerCase().trim().includes(value)
+		// 	);
+		// 	// On vérifie si la saisie correspond à un mot de description
+		// 	let isRecipeDescription = recipe.description
+		// 		.toLowerCase()
+		// 		.trim()
+		// 		.includes(value);
+		// 	// Retourner true si une des conditions matchent
+
+		// 	return isRecipeName || isRecipeIngredient || isRecipeDescription;
+		// });
 		const filteredIngredients = filteredRecipes.reduce((acc, recipe) => {
 			return [
 				...acc,
@@ -116,14 +111,20 @@ searchBar.addEventListener('input', event => {
 		cardMenu.innerHTML = '';
 
 		// Afficher les recettes correspondantes
-		if (filteredRecipes.length > 0) {
+		if (filteredRecipes.length > 1) {
 			filteredRecipes.forEach(recipe => {
-				nbrecipes.textContent = `${filteredRecipes.length} RECETTTTTTTES`;
+				nbrecipes.textContent = `${filteredRecipes.length} recettes`;
 				displayRecipe(recipe);
-				// j'affiche le nombre de recettes, enlever le "s" pour 0 et 1 recette
+				console.log('filteredRecipes', filteredRecipes);
 			});
 		} else if (filteredRecipes.length === 1) {
 			nbrecipes.textContent = `1 recette`;
+			filteredRecipes.forEach(recipe => {
+				nbrecipes.textContent = `${filteredRecipes.length} recette`;
+				displayRecipe(recipe);
+				console.log('filteredRecipes', filteredRecipes);
+				// j'affiche le nombre de recettes, enlever le "s" pour 0 et 1 recette
+			});
 		} else {
 			nbrecipes.textContent = `0 recette`;
 			cardMenu.innerHTML = `Aucune recette ne contient ${value}. Vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
@@ -195,7 +196,7 @@ const filterIngredients = value => {
 		filteredListIngredients.addEventListener('click', handleIngredientClick);
 	});
 };
-const handleIngredientClick = event => {
+const handleIngredientClick = (event, value) => {
 	let selectedElement = event.target.textContent;
 	if (tagListUpdated.includes(selectedElement)) {
 		tagListUpdated = tagListUpdated.filter(
@@ -206,8 +207,9 @@ const handleIngredientClick = event => {
 	}
 	console.log('tagListUpdated', tagListUpdated);
 
-	updateFilteredRecipes();
-	updateSelectedIngredientsDisplay();
+	updateFilteredRecipes(value);
+	updateSelectedIngredientsDisplay(value);
+	console.log('VALUE1', value);
 };
 function updateFilteredRecipes() {
 	let filteredRecipes = recipes.filter(recipe => {
@@ -224,7 +226,7 @@ function updateFilteredRecipes() {
 			let isUstensilMatch = recipe.ustensils.some(ustensil =>
 				ustensil.toLowerCase().includes(selectedElement.toLowerCase())
 			);
-
+			console.log('VALUE2', value);
 			// Retourner vrai si l'élément sélectionné correspond à un ingrédient, un appareil ou un ustensile de la recette
 			return isIngredientMatch || isApplianceMatch || isUstensilMatch;
 		});
@@ -233,19 +235,27 @@ function updateFilteredRecipes() {
 
 	// Afficher les recettes filtrées
 	cardMenu.innerHTML = '';
-	if (filteredRecipes.length > 0) {
+	if (filteredRecipes.length > 1) {
 		filteredRecipes.forEach(recipe => {
 			displayRecipe(recipe);
 			nbrecipes.textContent = `${filteredRecipes.length} recettes`;
 		});
 	} else if (filteredRecipes.length === 1) {
-		nbrecipes.textContent = `1 recette`;
+		filteredRecipes.forEach(recipe => {
+			nbrecipes.textContent = `${filteredRecipes.length} recette`;
+			displayRecipe(recipe);
+			console.log('filteredRecipes', filteredRecipes);
+			// j'affiche le nombre de recettes, enlever le "s" pour 0 et 1 recette
+		});
 	} else {
 		nbrecipes.textContent = `0 recette`;
-		cardMenu.innerHTML = `Aucune recette ne contient INGREDIENT. Vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
+		console.log('VALUE3', value);
+		cardMenu.innerHTML = `Aucune recette ne contient ${value}. Vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
+		console.log('ingredient');
 	}
 }
-const updateSelectedIngredientsDisplay = () => {
+
+const updateSelectedIngredientsDisplay = value => {
 	const paraListIngredients = document.querySelector('.paraList');
 	paraListIngredients.innerHTML = '';
 	tagListUpdated.forEach(ingredient => {
@@ -253,7 +263,7 @@ const updateSelectedIngredientsDisplay = () => {
 		span.classList.add('spantagList');
 		span.textContent = `${ingredient} X`;
 		paraListIngredients.appendChild(span);
-
+		console.log('VALUE4', value);
 		span.addEventListener('click', event => {
 			let index = tagListUpdated.indexOf(
 				event.currentTarget.textContent.slice(0, -2)
@@ -261,7 +271,7 @@ const updateSelectedIngredientsDisplay = () => {
 			event.currentTarget.remove();
 			if (index !== -1) {
 				tagListUpdated.splice(index, 1);
-				updateFilteredRecipes();
+				updateFilteredRecipes(value);
 			}
 		});
 	});
@@ -272,6 +282,7 @@ const updateFilterIngredient = () => {
 	inputIngredient.addEventListener('input', event => {
 		let value = event.target.value.trim().toLowerCase();
 		filterIngredients(value);
+		console.log('VALUE5', value);
 	});
 };
 updateFilterIngredient();
@@ -367,16 +378,21 @@ const updateFilterAppliance = () => {
 
 				// Afficher les recettes filtrées
 				cardMenu.innerHTML = '';
-				if (filteredRecipes.length > 0) {
+				if (filteredRecipes.length > 1) {
 					filteredRecipes.forEach(recipe => {
 						displayRecipe(recipe);
 						nbrecipes.textContent = `${filteredRecipes.length} recettes`;
 					});
 				} else if (filteredRecipes.length === 1) {
-					nbrecipes.textContent = `1 recette`;
+					filteredRecipes.forEach(recipe => {
+						nbrecipes.textContent = `${filteredRecipes.length} recette`;
+						displayRecipe(recipe);
+						console.log('filteredRecipes', filteredRecipes);
+						// j'affiche le nombre de recettes, enlever le "s" pour 0 et 1 recette
+					});
 				} else {
 					nbrecipes.textContent = `0 recette`;
-					cardMenu.innerHTML = `Aucune recette ne contient CET APPAREIL. Vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
+					cardMenu.innerHTML = `Aucune recette ne contient ${value}. Vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
 				}
 			}
 		});
@@ -476,16 +492,21 @@ const updateFilterUstensils = () => {
 
 				// Afficher les recettes filtrées
 				cardMenu.innerHTML = '';
-				if (filteredRecipes.length > 0) {
+				if (filteredRecipes.length > 1) {
 					filteredRecipes.forEach(recipe => {
 						displayRecipe(recipe);
 						nbrecipes.textContent = `${filteredRecipes.length} recettes`;
 					});
 				} else if (filteredRecipes.length === 1) {
-					nbrecipes.textContent = `1 recette`;
+					filteredRecipes.forEach(recipe => {
+						nbrecipes.textContent = `${filteredRecipes.length} recette`;
+						displayRecipe(recipe);
+						console.log('filteredRecipes', filteredRecipes);
+						// j'affiche le nombre de recettes, enlever le "s" pour 0 et 1 recette
+					});
 				} else {
 					nbrecipes.textContent = `0 recette`;
-					cardMenu.innerHTML = `Aucune recette ne contient CET USTENSIL. Vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
+					cardMenu.innerHTML = `Aucune recette ne contient ${value}. Vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
 				}
 			}
 		});
