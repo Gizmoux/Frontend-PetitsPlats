@@ -223,7 +223,7 @@ body {
 }
 .filteredListIngredients:hover {
 	cursor: pointer;
-	background-color: red;
+	background-color: #fdd15b;
 }
 
 .paraList span {
