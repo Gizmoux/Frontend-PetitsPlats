@@ -1,155 +1,28 @@
 import recipes from './assets/data/recipes.js';
-
-const dropdown = () => {
-	const buttonFilters = document.querySelectorAll('.button-filter');
-
-	buttonFilters.forEach(button => {
-		const chevronIcon = button.querySelector('.fas.fa-chevron-down');
-		const chevronIconUp = button.querySelector('.fas.fa-chevron-up');
-		const dropdownContent = button.nextElementSibling;
-
-		chevronIcon.addEventListener('click', () => {
-			chevronIconUp.style.display = 'inline-block';
-			chevronIcon.style.display = 'none';
-			dropdownContent.classList.toggle('show-options');
-			// console.log("J'ai cliqué sur le chevron down");
-		});
-		chevronIconUp.addEventListener('click', () => {
-			chevronIconUp.style.display = 'none';
-			chevronIcon.style.display = 'inline-block';
-			dropdownContent.classList.toggle('show-options');
-			// console.log("J'ai cliqué sur le chevron up");
-		});
-	});
-};
-dropdown();
-
-// RECHERCHE PRINCIPALE
-
-const searchBar = document.querySelector('.search-bar');
+import { dropdown } from './dropDown.js';
+import { mainSearch } from './mainSearch.js';
+import { updateFilteredRecipes } from './updateFilteredRecipes.js';
 const nbrecipes = document.getElementById('total-recipes');
 const menuItemIngredients = document.querySelector('.menu-item-ingredients');
 const menuItemAppliance = document.querySelector('.menu-item-appliance');
 const menuItemUstensils = document.querySelector('.menu-item-ustensils');
+const cardMenu = document.querySelector('.card-menu');
+
 let tabIngredient = [];
 let tabAppliance = [];
 let tabUstensils = [];
-
 nbrecipes.textContent = `${recipes.length} recettes`;
 
-const emptyInput = document.querySelector('.fa-xmark');
-let value = '';
-searchBar.addEventListener('input', event => {
-	value = event.target.value.trim().toLowerCase();
+dropdown();
+mainSearch();
 
-	if (value.length > 3) {
-		emptyInput.style.display = 'block';
+//! BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS
+//! BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS
 
-		emptyInput.addEventListener('click', () => {
-			let textInput = document.querySelector('.search-bar');
-			textInput.value = '';
-		});
-
-		// Je vais filtrer les recettes selon la saisie du User
-		let filteredRecipes = recipes.filter(recipe => {
-			// On vérifie si la saisie correspond à un nom de recette
-			let isRecipeName = recipe.name.toLowerCase().trim().includes(value);
-			// On vérifie si la saisie correspond à un ingrédient
-			let isRecipeIngredient = recipe.ingredients.some(ingredient =>
-				ingredient.ingredient.toLowerCase().trim().includes(value)
-			);
-			// On vérifie si la saisie correspond à un mot de description
-			let isRecipeDescription = recipe.description
-				.toLowerCase()
-				.trim()
-				.includes(value);
-			// Retourner true si une des conditions matchent
-
-			return isRecipeName || isRecipeIngredient || isRecipeDescription;
-		});
-		const filteredIngredients = filteredRecipes.reduce((acc, recipe) => {
-			return [
-				...acc,
-				...recipe.ingredients.map(ingredient => ingredient.ingredient),
-			];
-		}, []);
-
-		const uniqueIngredients = [...new Set(filteredIngredients)];
-		displayFilteredItems(uniqueIngredients, menuItemIngredients);
-
-		// Filtrer et afficher les appareils correspondants
-		const filteredAppliance = filteredRecipes.map(recipe => recipe.appliance);
-		const uniqueAppliance = [...new Set(filteredAppliance)];
-
-		displayFilteredItems(uniqueAppliance, menuItemAppliance);
-
-		// Filtrer et afficher les ustensiles correspondants
-		const filteredUstensils = filteredRecipes.reduce((acc, recipe) => {
-			return [...acc, ...recipe.ustensils];
-		}, []);
-		const uniqueUstensils = [...new Set(filteredUstensils)];
-		displayFilteredItems(uniqueUstensils, menuItemUstensils);
-
-		cardMenu.innerHTML = '';
-
-		// Afficher les recettes correspondantes
-		if (filteredRecipes.length > 1) {
-			filteredRecipes.forEach(recipe => {
-				nbrecipes.textContent = `${filteredRecipes.length} recettes`;
-				displayRecipe(recipe);
-				console.log('filteredRecipes', filteredRecipes);
-			});
-		} else if (filteredRecipes.length === 1) {
-			nbrecipes.textContent = `1 recette`;
-			filteredRecipes.forEach(recipe => {
-				nbrecipes.textContent = `${filteredRecipes.length} recette`;
-				displayRecipe(recipe);
-				console.log('filteredRecipes', filteredRecipes);
-				// j'affiche le nombre de recettes, enlever le "s" pour 0 et 1 recette
-			});
-		} else {
-			nbrecipes.textContent = `0 recette`;
-			cardMenu.innerHTML = `Aucune recette ne contient ${value}. Vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
-		}
-	} else if (value.length === 0) {
-		cardMenu.innerHTML = '';
-		emptyInput.style.display = 'none';
-
-		recipes.forEach(recipe => {
-			nbrecipes.textContent = `${recipes.length} recettes`;
-			displayRecipe(recipe);
-		});
-	}
-});
-function displayFilteredItems(filteredItems, listContainer) {
-	listContainer.innerHTML = '';
-	filteredItems.forEach(item => {
-		let filteredListItem = document.createElement('li');
-		filteredListItem.textContent = item;
-		listContainer.appendChild(filteredListItem);
-		filteredListItem.addEventListener('click', handleIngredientClick);
-		filteredListItem.addEventListener('click', handleClickAppliance);
-		filteredListItem.addEventListener('click', handleClickUstensil);
-	});
-}
-function emptyInputClick() {
-	emptyInput.addEventListener('click', () => {
-		let textInput = document.querySelector('.search-bar');
-		textInput.value = '';
-	});
-}
-emptyInputClick();
-// Fonction updateFilter
-// Filtre les recettes selon la recherche du user
-
-// BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS
-// BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS
-// BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS
-// BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS
-// BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS
-// BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS
 let menuIngredientLi;
 let tagListUpdated = [];
+updateFilteredRecipes();
+
 // Création Liste
 const getIngredientList = () => {
 	recipes.forEach(recipe => {
@@ -190,52 +63,9 @@ const handleIngredientClick = event => {
 	} else {
 		tagListUpdated.push(selectedElement);
 	}
-	console.log('tagListUpdated', tagListUpdated);
-
 	updateFilteredRecipes();
 	updateSelectedIngredientsDisplay();
 };
-function updateFilteredRecipes() {
-	let filteredRecipes = recipes.filter(recipe => {
-		return tagListUpdated.every(selectedElement => {
-			let isIngredientMatch = recipe.ingredients.some(
-				item => item.ingredient.toLowerCase() === selectedElement.toLowerCase()
-			);
-
-			// Vérifier si l'élément sélectionné correspond à l'appareil de la recette
-			let isApplianceMatch =
-				recipe.appliance.toLowerCase() === selectedElement.toLowerCase();
-
-			// Vérifier si l'élément sélectionné est présent dans les ustensiles de la recette
-			let isUstensilMatch = recipe.ustensils.some(ustensil =>
-				ustensil.toLowerCase().includes(selectedElement.toLowerCase())
-			);
-
-			// Retourner vrai si l'élément sélectionné correspond à un ingrédient, un appareil ou un ustensile de la recette
-			return isIngredientMatch || isApplianceMatch || isUstensilMatch;
-		});
-	});
-
-	// Afficher les recettes filtrées
-	cardMenu.innerHTML = '';
-	if (filteredRecipes.length > 1) {
-		filteredRecipes.forEach(recipe => {
-			displayRecipe(recipe);
-			nbrecipes.textContent = `${filteredRecipes.length} recettes`;
-		});
-	} else if (filteredRecipes.length === 1) {
-		filteredRecipes.forEach(recipe => {
-			nbrecipes.textContent = `${filteredRecipes.length} recette`;
-			displayRecipe(recipe);
-
-			// j'affiche le nombre de recettes, enlever le "s" pour 0 et 1 recette
-		});
-	} else {
-		nbrecipes.textContent = `0 recette`;
-
-		cardMenu.innerHTML = `Aucune recette ne contient ${value}. Vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
-	}
-}
 
 const updateSelectedIngredientsDisplay = value => {
 	const paraListIngredients = document.querySelector('.paraList');
@@ -267,14 +97,9 @@ const updateFilterIngredient = () => {
 	});
 };
 updateFilterIngredient();
-// BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS
-// BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS
-// BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS
-// BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS
-// BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS
-// BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS
-// BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS
-// BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS
+//! BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS
+//! BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS
+
 const handleClickAppliance = event => {
 	let selectedElement = event.target.textContent;
 	if (tagListUpdated.includes(selectedElement)) {
@@ -288,9 +113,12 @@ const handleClickAppliance = event => {
 
 	const paraListAppliance = document.querySelector('.paraList');
 	paraListAppliance.innerHTML = '';
-	tagListUpdated.forEach(ingredient => {
+
+	tagListUpdated.forEach(appliance => {
+		console.log('appliance', appliance);
+
 		let span = document.createElement('span');
-		span.textContent = `${ingredient} x`;
+		span.textContent = `${appliance} x`;
 		paraListAppliance.appendChild(span);
 
 		span.addEventListener('click', event => {
@@ -298,25 +126,27 @@ const handleClickAppliance = event => {
 				event.currentTarget.textContent.slice(0, -2)
 			);
 			event.currentTarget.remove();
-
 			if (index !== -1) {
 				tagListUpdated.splice(index, 1);
-
 				updateFilteredRecipes();
 			}
 		});
 	});
+	// console.log('tagListUpdated', tagListUpdated);
 };
 const updateFilterAppliance = () => {
 	const inputAppliance = document.querySelector('.inputAppliance');
-
+	const uniqueAppliances = new Set();
 	recipes.forEach(recipe => {
-		const menuApplianceLi = document.createElement('li');
-		menuApplianceLi.classList.add('menuApplianceLi');
-		menuApplianceLi.textContent = `${recipe.appliance}`;
-		menuItemAppliance.appendChild(menuApplianceLi);
-		tabAppliance.push(menuApplianceLi.textContent);
-		menuApplianceLi.addEventListener('click', handleClickAppliance);
+		if (!uniqueAppliances.has(recipe.appliance)) {
+			const menuApplianceLi = document.createElement('li');
+			menuApplianceLi.classList.add('menuApplianceLi');
+			menuApplianceLi.textContent = `${recipe.appliance}`;
+			menuItemAppliance.appendChild(menuApplianceLi);
+			tabAppliance.push(menuApplianceLi.textContent);
+			uniqueAppliances.add(recipe.appliance);
+			menuApplianceLi.addEventListener('click', handleClickAppliance);
+		}
 	});
 
 	inputAppliance.addEventListener('input', event => {
@@ -337,63 +167,15 @@ const updateFilterAppliance = () => {
 			menuItemAppliance.appendChild(filteredListAppliance);
 
 			filteredListAppliance.addEventListener('click', handleClickAppliance);
-
-			function updateFilteredRecipes() {
-				let filteredRecipes = recipes.filter(recipe => {
-					return tagListUpdated.every(selectedElement => {
-						let isIngredientMatch = recipe.ingredients.some(
-							item =>
-								item.ingredient.toLowerCase() === selectedElement.toLowerCase()
-						);
-
-						// Vérifier si l'élément sélectionné correspond à l'appareil de la recette
-						let isApplianceMatch =
-							recipe.appliance.toLowerCase() === selectedElement.toLowerCase();
-
-						// Vérifier si l'élément sélectionné est présent dans les ustensiles de la recette
-						let isUstensilMatch = recipe.ustensils.some(ustensil =>
-							ustensil.toLowerCase().includes(selectedElement.toLowerCase())
-						);
-
-						// Retourner vrai si l'élément sélectionné correspond à un ingrédient, un appareil ou un ustensile de la recette
-						return isIngredientMatch || isApplianceMatch || isUstensilMatch;
-					});
-				});
-				console.log('tagListUpdatedUstensils', tagListUpdated);
-
-				// Afficher les recettes filtrées
-				cardMenu.innerHTML = '';
-				if (filteredRecipes.length > 1) {
-					filteredRecipes.forEach(recipe => {
-						displayRecipe(recipe);
-						nbrecipes.textContent = `${filteredRecipes.length} recettes`;
-					});
-				} else if (filteredRecipes.length === 1) {
-					filteredRecipes.forEach(recipe => {
-						nbrecipes.textContent = `${filteredRecipes.length} recette`;
-						displayRecipe(recipe);
-						console.log('filteredRecipes', filteredRecipes);
-						// j'affiche le nombre de recettes, enlever le "s" pour 0 et 1 recette
-					});
-				} else {
-					nbrecipes.textContent = `0 recette`;
-					cardMenu.innerHTML = `Aucune recette ne contient ${value}. Vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
-				}
-			}
+			updateFilteredRecipes();
 		});
 	});
 };
 updateFilterAppliance();
 
-// BOUTONS USTENSILS / LISTE DES USTENSILS BOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILS
-// BOUTONS USTENSILS / LISTE DES USTENSILS BOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILS
-// BOUTONS USTENSILS / LISTE DES USTENSILS BOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILS
-// BOUTONS USTENSILS / LISTE DES USTENSILS BOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILS
-// BOUTONS USTENSILS / LISTE DES USTENSILS BOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILS
-// BOUTONS USTENSILS / LISTE DES USTENSILS BOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILS
-// BOUTONS USTENSILS / LISTE DES USTENSILS BOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILS
-// BOUTONS USTENSILS / LISTE DES USTENSILS BOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILS
-// BOUTONS USTENSILS / LISTE DES USTENSILS BOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILS
+//! BOUTONS USTENSILS / LISTE DES USTENSILS BOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILS
+//! BOUTONS USTENSILS / LISTE DES USTENSILS BOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILS
+
 const handleClickUstensil = event => {
 	let selectedElement = event.target.textContent;
 	if (tagListUpdated.includes(selectedElement)) {
@@ -448,8 +230,6 @@ const updateFilterUstensils = () => {
 			// Ligne pour effacer ma liste et ensuite la mettre à jour
 		});
 		menuItemUstensils.innerHTML = '';
-
-		// console.log(event.target.value);
 		inputFilterUstensils = inputFilterUstensils.map(item => item.toLowerCase());
 		const uniqueUstensil = [...new Set(inputFilterUstensils)];
 		uniqueUstensil.forEach(item => {
@@ -459,51 +239,13 @@ const updateFilterUstensils = () => {
 			menuItemUstensils.appendChild(filteredListUstensils);
 
 			filteredListUstensils.addEventListener('click', handleClickUstensil);
-			function updateFilteredRecipes() {
-				let filteredRecipes = recipes.filter(recipe => {
-					return tagListUpdated.every(selectedElement => {
-						let isIngredientMatch = recipe.ingredients.some(
-							item =>
-								item.ingredient.toLowerCase() === selectedElement.toLowerCase()
-						);
-						// Vérifier si l'élément sélectionné correspond à l'appareil de la recette
-						let isApplianceMatch =
-							recipe.appliance.toLowerCase() === selectedElement.toLowerCase();
-						// Vérifier si l'élément sélectionné est présent dans les ustensiles de la recette
-						let isUstensilMatch = recipe.ustensils.some(ustensil =>
-							ustensil.toLowerCase().includes(selectedElement.toLowerCase())
-						);
-						// Retourner vrai si l'élément sélectionné correspond à un ingrédient, un appareil ou un ustensile de la recette
-						return isIngredientMatch || isApplianceMatch || isUstensilMatch;
-					});
-				});
-
-				// Afficher les recettes filtrées
-				cardMenu.innerHTML = '';
-				if (filteredRecipes.length > 1) {
-					filteredRecipes.forEach(recipe => {
-						displayRecipe(recipe);
-						nbrecipes.textContent = `${filteredRecipes.length} recettes`;
-					});
-				} else if (filteredRecipes.length === 1) {
-					filteredRecipes.forEach(recipe => {
-						nbrecipes.textContent = `${filteredRecipes.length} recette`;
-						displayRecipe(recipe);
-						console.log('filteredRecipes', filteredRecipes);
-						// j'affiche le nombre de recettes, enlever le "s" pour 0 et 1 recette
-					});
-				} else {
-					nbrecipes.textContent = `0 recette`;
-					cardMenu.innerHTML = `Aucune recette ne contient ${value}. Vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
-				}
-			}
+			updateFilteredRecipes();
 		});
 	});
 };
 updateFilterUstensils();
 
 // Fonction pour afficher une recette
-const cardMenu = document.querySelector('.card-menu');
 function displayRecipe(recipe) {
 	// Créer une nouvelle div pour chaque recette
 
@@ -555,7 +297,9 @@ function displayRecipe(recipe) {
 		const ingredientName = document.createElement('p');
 		const ingredientQuantityUnit = document.createElement('p');
 		ingredientName.textContent = `${ingredient.ingredient}`;
-		ingredientQuantityUnit.textContent = `${ingredient.quantity} ${ingredient.unit}`;
+		ingredientQuantityUnit.textContent = `${
+			ingredient.quantity ? ingredient.quantity : ''
+		} ${ingredient.unit ? ingredient.unit : ''}`;
 		ingredientQuantityUnit.classList.add('ingredient-quantity-unit');
 		ingredientContent.appendChild(ingredientName);
 		ingredientContent.appendChild(ingredientQuantityUnit);
@@ -580,7 +324,14 @@ async function fetchData() {
 
 // Appeler la fonction fetchData pour récupérer les données
 fetchData();
-
+export {
+	handleIngredientClick,
+	handleClickAppliance,
+	handleClickUstensil,
+	displayRecipe,
+	updateFilteredRecipes,
+	tagListUpdated,
+};
 // Fonction réutilisable sur les autres filtres
 // const updateFilter = (inputElement, targetElement, tabElement) => {
 // 	inputElement.addEventListener('input', event => {

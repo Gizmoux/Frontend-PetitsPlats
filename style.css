@@ -127,6 +127,19 @@ body {
 .fa-chevron-up {
 	display: none;
 }
+.inputIngredient,
+.inputAppliance,
+.inputUstensils {
+	position: absolute;
+}
+.fa-magnifying-glass {
+	position: relative;
+	font-size: 14px;
+	left: 125px;
+	top: 5px;
+	margin-bottom: 10px;
+}
+
 #total-recipes {
 	margin-left: auto;
 	margin-right: 10px;
@@ -201,27 +214,15 @@ body {
 	padding: 5px 10px;
 	border-radius: 40px;
 }
-.menuIngredientLi:hover {
-	background-color: #fdd15b;
-	cursor: pointer;
-}
-.menuApplianceLi:hover {
-	background-color: #fdd15b;
-	cursor: pointer;
-}
-.menuUstensilsLi:hover {
-	cursor: pointer;
-	background-color: #fdd15b;
-}
-.filteredListUstensils:hover {
-	cursor: pointer;
-	background-color: #fdd15b;
-}
-.filteredListAppliance:hover {
-	cursor: pointer;
-	background-color: #fdd15b;
-}
-.filteredListIngredients:hover {
+.menuIngredientLi:hover,
+.menuApplianceLi:hover,
+.menuUstensilsLi:hover,
+.filteredListUstensils:hover,
+.filteredListAppliance:hover,
+.filteredListIngredients:hover,
+.menu-item-ingredients li:hover,
+.menu-item-appliance li:hover,
+.menu-item-ustensils li:hover {
 	cursor: pointer;
 	background-color: #fdd15b;
 }
