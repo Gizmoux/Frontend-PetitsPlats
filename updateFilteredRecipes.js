@@ -1,9 +1,12 @@
 import recipes from './assets/data/recipes.js';
-import { displayRecipe, tagListUpdated } from './index.js';
+import { displayRecipe } from './displayRecipe.js';
+import { tagListUpdated } from './index.js';
+
 const nbrecipes = document.getElementById('total-recipes');
 const cardMenu = document.querySelector('.card-menu');
 
 let value = '';
+
 function updateFilteredRecipes() {
 	// Fonction commune
 	let filteredRecipes = recipes.filter(recipe => {
@@ -14,11 +17,17 @@ function updateFilteredRecipes() {
 			// Vérifier si l'élément sélectionné correspond à l'appareil de la recette
 			let isApplianceMatch =
 				recipe.appliance.toLowerCase() === selectedElement.toLowerCase();
+
 			// Vérifier si l'élément sélectionné est présent dans les ustensiles de la recette
 			let isUstensilMatch = recipe.ustensils.some(ustensil =>
 				ustensil.toLowerCase().includes(selectedElement.toLowerCase())
 			);
+
 			// Retourner vrai si l'élément sélectionné correspond à un ingrédient, un appareil ou un ustensile de la recette
+			console.log('tagListUpdated1', tagListUpdated);
+			console.log('tagListUpdated2', tagListUpdated);
+			console.log('tagListUpdated3', tagListUpdated);
+
 			return isIngredientMatch || isApplianceMatch || isUstensilMatch;
 		});
 	});

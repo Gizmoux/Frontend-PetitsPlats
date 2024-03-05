@@ -3,8 +3,8 @@ import {
 	handleIngredientClick,
 	handleClickAppliance,
 	handleClickUstensil,
-	displayRecipe,
 } from './index.js';
+import { displayRecipe } from './displayRecipe.js';
 const searchBar = document.querySelector('.search-bar');
 const emptyInput = document.querySelector('.fa-xmark');
 const nbrecipes = document.getElementById('total-recipes');
