@@ -21,23 +21,29 @@ const mainSearch = () => {
 		if (value.length > 3) {
 			emptyInput.style.display = 'block';
 
-			// Je vais filtrer les recettes selon la saisie du User
-			let filteredRecipes = recipes.filter(recipe => {
-				// On vérifie si la saisie correspond à un nom de recette
+			let filteredRecipes = [];
+
+			for (const recipe of recipes) {
+				let isRecipeIngredient = false;
+				for (let i = 0; i < recipe.ingredients.length; i++) {
+					let ingredient = recipe.ingredients[i].ingredient
+						.toLowerCase()
+						.trim();
+					if (ingredient.includes(value)) {
+						isRecipeIngredient = true;
+						break;
+					}
+				}
 				let isRecipeName = recipe.name.toLowerCase().trim().includes(value);
-				// On vérifie si la saisie correspond à un ingrédient
-				let isRecipeIngredient = recipe.ingredients.some(ingredient =>
-					ingredient.ingredient.toLowerCase().trim().includes(value)
-				);
-				// On vérifie si la saisie correspond à un mot de description
 				let isRecipeDescription = recipe.description
 					.toLowerCase()
 					.trim()
 					.includes(value);
-				// Retourner true si une des conditions matchent
 
-				return isRecipeName || isRecipeIngredient || isRecipeDescription;
-			});
+				if (isRecipeName || isRecipeDescription || isRecipeIngredient) {
+					filteredRecipes.push(recipe);
+				}
+			}
 			const filteredIngredients = filteredRecipes.reduce((acc, recipe) => {
 				return [
 					...acc,
