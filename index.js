@@ -100,7 +100,7 @@ const updateSelectedIngredientsDisplay = () => {
 	tagListUpdated.forEach(ingredient => {
 		let span = document.createElement('span');
 		span.classList.add('spantagList');
-		span.textContent = `${ingredient} X`;
+		span.textContent = `${ingredient} x`;
 		paraListIngredients.appendChild(span);
 
 		span.addEventListener('click', event => {

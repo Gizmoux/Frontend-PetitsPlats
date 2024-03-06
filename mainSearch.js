@@ -3,6 +3,7 @@ import {
 	handleIngredientClick,
 	handleClickAppliance,
 	handleClickUstensil,
+	updateFilteredRecipes,
 } from './index.js';
 import { displayRecipe } from './displayRecipe.js';
 const searchBar = document.querySelector('.search-bar');

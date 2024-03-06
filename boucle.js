@@ -1,5 +1,6 @@
 //! AVEC BOUCLE FOR A mettre dans une autre branche
 // let filteredRecipes = [];
+// let value=""
 // for (const recipe of recipes) {
 // 	let isRecipeIngredient = false;
 // 	for (let i = 0; i < recipe.ingredients.length; i++) {
