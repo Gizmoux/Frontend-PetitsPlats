@@ -20,9 +20,21 @@ dropdown();
 mainSearch();
 // function updateFilteredRecipes() ici
 
+function displayFilteredItems(filteredItems, listContainer) {
+	listContainer.innerHTML = '';
+	filteredItems.forEach(item => {
+		let filteredListItem = document.createElement('li');
+		filteredListItem.textContent = item;
+		listContainer.appendChild(filteredListItem);
+		filteredListItem.addEventListener('click', handleIngredientClick);
+		filteredListItem.addEventListener('click', handleClickAppliance);
+		filteredListItem.addEventListener('click', handleClickUstensil);
+	});
+}
 //! BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS
 //! BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS
 // Création Liste
+
 const getIngredientList = () => {
 	recipes.forEach(recipe => {
 		recipe.ingredients.forEach(ingredient => {
@@ -52,6 +64,22 @@ const filterIngredients = value => {
 		menuItemIngredients.appendChild(filteredListIngredients);
 		filteredListIngredients.addEventListener('click', handleIngredientClick);
 	});
+	// Mettre à jour les filtres pour les appareils
+	const filteredRecipes = recipes.filter(recipe => {
+		return recipe.ingredients.some(ingredient =>
+			uniqueIngredients.includes(ingredient.ingredient.toLowerCase())
+		);
+	});
+	const filteredAppliance = filteredRecipes.map(recipe => recipe.appliance);
+	const uniqueAppliance = [...new Set(filteredAppliance)];
+	displayFilteredItems(uniqueAppliance, menuItemAppliance);
+
+	// Mettre à jour les filtres pour les ustensiles
+	const filteredUstensils = filteredRecipes.reduce((acc, recipe) => {
+		return [...acc, ...recipe.ustensils];
+	}, []);
+	const uniqueUstensils = [...new Set(filteredUstensils)];
+	displayFilteredItems(uniqueUstensils, menuItemUstensils);
 };
 const handleIngredientClick = event => {
 	let selectedElement = event.target.textContent;
@@ -87,6 +115,7 @@ const updateSelectedIngredientsDisplay = () => {
 		});
 	});
 };
+
 const updateFilterIngredient = () => {
 	getIngredientList();
 	const inputIngredient = document.querySelector('.inputIngredient');
@@ -163,8 +192,38 @@ const updateFilterAppliance = () => {
 			filteredListAppliance.textContent = item;
 			menuItemAppliance.appendChild(filteredListAppliance);
 			filteredListAppliance.addEventListener('click', handleClickAppliance);
-			updateFilteredRecipes();
 		});
+		const filteredRecipesByAppliance = recipes.filter(recipe => {
+			return uniqueAppliance.includes(recipe.appliance.toLowerCase());
+		});
+		const filteredIngredientsByAppliance = filteredRecipesByAppliance.reduce(
+			(acc, recipe) => {
+				return [
+					...acc,
+					...recipe.ingredients.map(ingredient =>
+						ingredient.ingredient.toLowerCase()
+					),
+				];
+			},
+			[]
+		);
+		const uniqueIngredientsByAppliance = [
+			...new Set(filteredIngredientsByAppliance),
+		];
+		displayFilteredItems(uniqueIngredientsByAppliance, menuItemIngredients);
+
+		// Filtrer et mettre à jour les ustensiles en fonction des appareils filtrés
+		const filteredUstensilsByAppliance = filteredRecipesByAppliance.reduce(
+			(acc, recipe) => {
+				return [...acc, ...recipe.ustensils];
+			},
+			[]
+		);
+		const uniqueUstensilsByAppliance = [
+			...new Set(filteredUstensilsByAppliance),
+		];
+		displayFilteredItems(uniqueUstensilsByAppliance, menuItemUstensils);
+		updateFilteredRecipes();
 	});
 };
 updateFilterAppliance();
@@ -235,6 +294,36 @@ const updateFilterUstensils = () => {
 			menuItemUstensils.appendChild(filteredListUstensils);
 
 			filteredListUstensils.addEventListener('click', handleClickUstensil);
+			// Filtrer et mettre à jour les ingrédients en fonction des ustensiles filtrés
+			const filteredRecipesByUstensils = recipes.filter(recipe => {
+				return recipe.ustensils.some(ustensil =>
+					uniqueUstensil.includes(ustensil.toLowerCase())
+				);
+			});
+			const filteredIngredientsByUstensils = filteredRecipesByUstensils.reduce(
+				(acc, recipe) => {
+					return [
+						...acc,
+						...recipe.ingredients.map(ingredient =>
+							ingredient.ingredient.toLowerCase()
+						),
+					];
+				},
+				[]
+			);
+			const uniqueIngredientsByUstensils = [
+				...new Set(filteredIngredientsByUstensils),
+			];
+			displayFilteredItems(uniqueIngredientsByUstensils, menuItemIngredients);
+
+			// Filtrer et mettre à jour les appareils en fonction des ustensiles filtrés
+			const filteredApplianceByUstensils = filteredRecipesByUstensils.map(
+				recipe => recipe.appliance
+			);
+			const uniqueApplianceByUstensils = [
+				...new Set(filteredApplianceByUstensils),
+			];
+			displayFilteredItems(uniqueApplianceByUstensils, menuItemAppliance);
 			updateFilteredRecipes();
 		});
 	});
@@ -262,6 +351,7 @@ export {
 	handleClickAppliance,
 	handleClickUstensil,
 	updateFilteredRecipes,
+	displayRecipe,
 	tagListUpdated,
 };
 // Fonction réutilisable sur les autres filtres

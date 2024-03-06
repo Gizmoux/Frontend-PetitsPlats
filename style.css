@@ -98,10 +98,9 @@ body {
 }
 .dropdown_content li {
 	position: relative;
-
-	z-index: 1;
 	max-height: calc(1.2em * 10);
 	overflow: overlay;
+	padding: 3px 0px 3px 10px;
 	text-overflow: ellipsis;
 }
 
@@ -109,6 +108,7 @@ body {
 	/* background-color: lightgreen; */
 	display: flex;
 	height: 200px;
+	margin-top: -10px;
 }
 
 .fas.fa-chevron-up {
@@ -131,12 +131,17 @@ body {
 .inputAppliance,
 .inputUstensils {
 	position: absolute;
+	width: 120px;
+	height: 20px;
+	border-radius: 5px;
+	border: 1px solid #7a7a7a;
+	margin: 0px 0px 0px 16px;
 }
 .fa-magnifying-glass {
 	position: relative;
 	color: #7a7a7a;
 	font-size: 14px;
-	left: 127px;
+	left: 122px;
 	top: 5px;
 	margin-bottom: 12px;
 }
@@ -226,6 +231,8 @@ body {
 .menu-item-ustensils li:hover {
 	cursor: pointer;
 	background-color: #fdd15b;
+	width: 100%;
+	padding: 2px;
 }
 
 .paraList span {

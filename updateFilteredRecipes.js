@@ -24,9 +24,6 @@ function updateFilteredRecipes() {
 			);
 
 			// Retourner vrai si l'élément sélectionné correspond à un ingrédient, un appareil ou un ustensile de la recette
-			console.log('tagListUpdated1', tagListUpdated);
-			console.log('tagListUpdated2', tagListUpdated);
-			console.log('tagListUpdated3', tagListUpdated);
 
 			return isIngredientMatch || isApplianceMatch || isUstensilMatch;
 		});

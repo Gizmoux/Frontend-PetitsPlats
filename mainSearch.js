@@ -7,11 +7,11 @@ import {
 import { displayRecipe } from './displayRecipe.js';
 const searchBar = document.querySelector('.search-bar');
 const emptyInput = document.querySelector('.fa-xmark');
+const cardMenu = document.querySelector('.card-menu');
 const nbrecipes = document.getElementById('total-recipes');
 const menuItemIngredients = document.querySelector('.menu-item-ingredients');
 const menuItemAppliance = document.querySelector('.menu-item-appliance');
 const menuItemUstensils = document.querySelector('.menu-item-ustensils');
-const cardMenu = document.querySelector('.card-menu');
 
 let value = '';
 const mainSearch = () => {
