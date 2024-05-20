@@ -8,17 +8,15 @@ const cardMenu = document.querySelector('.card-menu');
 let value = '';
 
 function updateFilteredRecipes() {
-	// Fonction commune
 	let filteredRecipes = recipes.filter(recipe => {
 		return tagListUpdated.every(selectedElement => {
 			let isIngredientMatch = recipe.ingredients.some(
 				item => item.ingredient.toLowerCase() === selectedElement.toLowerCase()
 			);
-			// Vérifier si l'élément sélectionné correspond à l'appareil de la recette
+			// Vérifier si l'élément sélectionné correspond à l'appareil de la recette / ustensile
 			let isApplianceMatch =
 				recipe.appliance.toLowerCase() === selectedElement.toLowerCase();
 
-			// Vérifier si l'élément sélectionné est présent dans les ustensiles de la recette
 			let isUstensilMatch = recipe.ustensils.some(ustensil =>
 				ustensil.toLowerCase().includes(selectedElement.toLowerCase())
 			);
@@ -39,7 +37,6 @@ function updateFilteredRecipes() {
 		filteredRecipes.forEach(recipe => {
 			nbrecipes.textContent = `${filteredRecipes.length} recette`;
 			displayRecipe(recipe);
-			// j'affiche le nombre de recettes, enlever le "s" pour 0 et 1 recette
 		});
 	} else {
 		nbrecipes.textContent = `0 recette`;

@@ -23,13 +23,11 @@ const mainSearch = () => {
 
 			// Je vais filtrer les recettes selon la saisie du User
 			let filteredRecipes = recipes.filter(recipe => {
-				// On vérifie si la saisie correspond à un nom de recette
+				// On vérifie si la saisie correspond à un nom de recette,un ingrédient ou un mot de description
 				let isRecipeName = recipe.name.toLowerCase().trim().includes(value);
-				// On vérifie si la saisie correspond à un ingrédient
 				let isRecipeIngredient = recipe.ingredients.some(ingredient =>
 					ingredient.ingredient.toLowerCase().trim().includes(value)
 				);
-				// On vérifie si la saisie correspond à un mot de description
 				let isRecipeDescription = recipe.description
 					.toLowerCase()
 					.trim()
@@ -53,7 +51,6 @@ const mainSearch = () => {
 			const uniqueAppliance = [...new Set(filteredAppliance)];
 
 			displayFilteredItems(uniqueAppliance, menuItemAppliance);
-
 			// Filtrer et afficher les ustensiles correspondants
 			const filteredUstensils = filteredRecipes.reduce((acc, recipe) => {
 				return [...acc, ...recipe.ustensils];
@@ -68,15 +65,12 @@ const mainSearch = () => {
 				filteredRecipes.forEach(recipe => {
 					nbrecipes.textContent = `${filteredRecipes.length} recettes`;
 					displayRecipe(recipe);
-					console.log('filteredRecipes', filteredRecipes);
 				});
 			} else if (filteredRecipes.length === 1) {
 				nbrecipes.textContent = `1 recette`;
 				filteredRecipes.forEach(recipe => {
 					nbrecipes.textContent = `${filteredRecipes.length} recette`;
 					displayRecipe(recipe);
-					console.log('filteredRecipes', filteredRecipes);
-					// j'affiche le nombre de recettes, enlever le "s" pour 0 et 1 recette
 				});
 			} else {
 				nbrecipes.textContent = `0 recette`;
