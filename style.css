@@ -212,7 +212,7 @@ body {
 	object-fit: cover;
 }
 .recipe-description {
-	max-height: calc(1.2em * 4);
+	max-height: calc(1.1em * 4);
 
 	/* text-overflow: clip; */
 	overflow: hidden;
