@@ -18,7 +18,7 @@ let value = '';
 const mainSearch = () => {
 	searchBar.addEventListener('input', event => {
 		value = event.target.value.trim().toLowerCase();
-		if (value.length > 3) {
+		if (value.length >= 3) {
 			emptyInput.style.display = 'block';
 
 			// Je vais filtrer les recettes selon la saisie du User
