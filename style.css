@@ -94,21 +94,25 @@ body {
 	flex-direction: column;
 	list-style-type: none;
 	transition: 0.1s ease-in-out;
-	margin: 0px 0px 0px -40px;
+	background-color: white;
+	margin: -18px 0px 0px 18px;
+	width: 190px;
 }
 .dropdown_content li {
 	position: relative;
 	max-height: calc(1.2em * 10);
-	overflow: overlay;
-	padding: 3px 0px 3px 10px;
+	overflow-y: auto;
+	overflow-x: hidden;
 	text-overflow: ellipsis;
+	margin: 5px 0px 0px 5px;
 }
 
 .dropdown_content.show-options {
 	/* background-color: lightgreen; */
 	display: flex;
 	height: 200px;
-	margin-top: -10px;
+	padding: 0;
+	width: 230px;
 }
 
 .fas.fa-chevron-up {
@@ -122,7 +126,7 @@ body {
 	display: flex;
 	justify-content: space-between;
 	/* align-items: center; */
-	margin-left: 2%;
+	margin-left: 4%;
 }
 .fa-chevron-up {
 	display: none;
@@ -131,18 +135,18 @@ body {
 .inputAppliance,
 .inputUstensils {
 	position: absolute;
-	width: 120px;
-	height: 20px;
+	width: 200px;
+	height: 30px;
 	border-radius: 5px;
 	border: 1px solid #7a7a7a;
-	margin: 0px 0px 0px 16px;
+	margin: 0px 0px 0px 10px;
 }
 .fa-magnifying-glass {
 	position: relative;
 	color: #7a7a7a;
-	font-size: 14px;
-	left: 122px;
-	top: 5px;
+	font-size: 17px;
+	left: 83%;
+	top: 7px;
 	margin-bottom: 12px;
 }
 
@@ -156,10 +160,13 @@ body {
 	margin: 15px 25px 15px 18px;
 	border-radius: 5px;
 	border: none;
+	width: 230px;
+	height: 40px;
 }
 .button-filter span {
 	margin-right: 15px;
 }
+
 .container {
 	background-color: #ececec;
 }
@@ -205,7 +212,7 @@ body {
 	object-fit: cover;
 }
 .recipe-description {
-	max-height: calc(1.2em * 4);
+	max-height: calc(1.1em * 4);
 
 	/* text-overflow: clip; */
 	overflow: hidden;
@@ -231,8 +238,7 @@ body {
 .menu-item-ustensils li:hover {
 	cursor: pointer;
 	background-color: #fdd15b;
-	width: 100%;
-	padding: 2px;
+	padding: 1px;
 }
 
 .paraList span {
