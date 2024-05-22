@@ -18,7 +18,6 @@ nbrecipes.textContent = `${recipes.length} recettes`;
 
 dropdown();
 mainSearch();
-// function updateFilteredRecipes() ici
 
 function displayFilteredItems(filteredItems, listContainer) {
 	listContainer.innerHTML = '';
@@ -31,9 +30,7 @@ function displayFilteredItems(filteredItems, listContainer) {
 		filteredListItem.addEventListener('click', handleClickUstensil);
 	});
 }
-//! BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS
-//! BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS BOUTONS INGREDIENTS / LISTE DES INGREDIENTS
-// Création Liste
+// BOUTONS INGREDIENTS / LISTE DES INGREDIENTS
 
 const getIngredientList = () => {
 	recipes.forEach(recipe => {
@@ -100,7 +97,7 @@ const updateSelectedIngredientsDisplay = () => {
 	tagListUpdated.forEach(ingredient => {
 		let span = document.createElement('span');
 		span.classList.add('spantagList');
-		span.textContent = `${ingredient} x`;
+		span.textContent = `${ingredient} X`;
 		paraListIngredients.appendChild(span);
 
 		span.addEventListener('click', event => {
@@ -125,8 +122,7 @@ const updateFilterIngredient = () => {
 	});
 };
 updateFilterIngredient();
-//! BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS
-//! BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS BOUTONS APPAREILS / LISTE DES APPAREILS
+// BOUTONS APPAREILS / LISTE DES APPAREILS
 
 const handleClickAppliance = event => {
 	let selectedElement = event.target.textContent;
@@ -138,15 +134,16 @@ const handleClickAppliance = event => {
 		tagListUpdated.push(selectedElement);
 	}
 	updateFilteredRecipes();
+	updateSelectedIngredientsDisplay();
 
 	const paraListAppliance = document.querySelector('.paraList');
 	paraListAppliance.innerHTML = '';
 
 	tagListUpdated.forEach(appliance => {
-		console.log('appliance', appliance);
+		// console.log('appliance', appliance);
 
 		let span = document.createElement('span');
-		span.textContent = `${appliance} x`;
+		span.textContent = `${appliance} X`;
 		paraListAppliance.appendChild(span);
 
 		span.addEventListener('click', event => {
@@ -228,11 +225,53 @@ const updateFilterAppliance = () => {
 };
 updateFilterAppliance();
 
-//! BOUTONS USTENSILS / LISTE DES USTENSILS BOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILS
-//! BOUTONS USTENSILS / LISTE DES USTENSILS BOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILSBOUTONS USTENSILS / LISTE DES USTENSILS
+// BOUTONS USTENSILS / LISTE DES USTENSILS
 
+// Fonction pour obtenir une liste unique d'éléments
+const getUniqueList = list => [
+	...new Set(list.map(item => item.toLowerCase())),
+];
+
+// Fonction pour obtenir la liste des ustensiles
+const updateFilterUstensils = () => {
+	const inputUstensils = document.querySelector('.inputUstensils');
+
+	// Récupérer tous les ustensiles des recettes et les dédupliquer
+	tabUstensils = getUniqueList(
+		recipes.reduce((acc, recipe) => {
+			return [...acc, ...recipe.ustensils];
+		}, [])
+	);
+
+	// Afficher la liste des ustensiles
+	const displayUstensils = ustensils => {
+		menuItemUstensils.innerHTML = '';
+		ustensils.forEach(ustensil => {
+			const menuUstensilsLi = document.createElement('li');
+			menuUstensilsLi.classList.add('menuUstensilsLi');
+			menuUstensilsLi.textContent = ustensil;
+			menuItemUstensils.appendChild(menuUstensilsLi);
+			menuUstensilsLi.addEventListener('click', handleClickUstensil);
+		});
+	};
+
+	// Afficher les ustensiles uniques au chargement de la page
+	displayUstensils(tabUstensils);
+
+	// Filtrer et afficher les ustensiles lors de la saisie dans l'input
+	inputUstensils.addEventListener('input', event => {
+		const value = event.target.value.trim().toLowerCase();
+		const inputFilterUstensils = tabUstensils.filter(item =>
+			item.toLowerCase().includes(value)
+		);
+
+		displayUstensils(getUniqueList(inputFilterUstensils));
+	});
+};
+
+// Fonction de gestion du clic sur un ustensile
 const handleClickUstensil = event => {
-	let selectedElement = event.target.textContent;
+	const selectedElement = event.target.textContent;
 	if (tagListUpdated.includes(selectedElement)) {
 		tagListUpdated = tagListUpdated.filter(
 			ustensil => ustensil !== selectedElement
@@ -241,96 +280,91 @@ const handleClickUstensil = event => {
 		tagListUpdated.push(selectedElement);
 	}
 
+	// Filtrer les recettes par les ustensiles sélectionnés
+	const filteredRecipes = recipes.filter(recipe => {
+		return recipe.ustensils.some(ustensil =>
+			tagListUpdated.includes(ustensil.toLowerCase())
+		);
+	});
+
+	// Filtrer les appareils en fonction des recettes filtrées
+	const filteredAppliance = filteredRecipes.map(recipe => recipe.appliance);
+	const uniqueAppliance = [...new Set(filteredAppliance)];
+	displayFilteredItems(uniqueAppliance, menuItemAppliance);
+
+	// Filtrer les ingrédients en fonction des recettes filtrées
+	const filteredIngredients = filteredRecipes.reduce((acc, recipe) => {
+		return [
+			...acc,
+			...recipe.ingredients.map(ingredient =>
+				ingredient.ingredient.toLowerCase()
+			),
+		];
+	}, []);
+	const uniqueIngredients = [...new Set(filteredIngredients)];
+	displayFilteredItems(uniqueIngredients, menuItemIngredients);
+
 	updateFilteredRecipes();
-	// Afficher les ingrédients sélectionnés dans la liste des filtres
+	updateSelectedIngredientsDisplay();
+
+	// Mettre à jour l'affichage des ustensiles sélectionnés
 	const paraListUstensil = document.querySelector('.paraList');
 	paraListUstensil.innerHTML = '';
-	tagListUpdated.forEach(ingredient => {
-		let span = document.createElement('span');
-		span.textContent = `${ingredient} x`;
+	tagListUpdated.forEach(ustensil => {
+		const span = document.createElement('span');
+		span.textContent = `${ustensil} X`;
 		paraListUstensil.appendChild(span);
 
 		span.addEventListener('click', event => {
-			let index = tagListUpdated.indexOf(
+			const index = tagListUpdated.indexOf(
 				event.currentTarget.textContent.slice(0, -2)
 			);
 			event.currentTarget.remove();
 
 			if (index !== -1) {
 				tagListUpdated.splice(index, 1);
-				// Réactualiser les recettes filtrées lorsque l'appareil est supprimé
 				updateFilteredRecipes();
+				// Mettre à jour les listes des ingrédients et appareils
+				const updatedFilteredRecipes = recipes.filter(recipe => {
+					return tagListUpdated.every(tag => {
+						return (
+							recipe.ustensils.includes(tag.toLowerCase()) ||
+							recipe.appliance.toLowerCase() === tag.toLowerCase() ||
+							recipe.ingredients.some(ingredient =>
+								ingredient.ingredient.toLowerCase().includes(tag.toLowerCase())
+							)
+						);
+					});
+				});
+
+				const updatedFilteredAppliance = updatedFilteredRecipes.map(
+					recipe => recipe.appliance
+				);
+				const updatedUniqueAppliance = [...new Set(updatedFilteredAppliance)];
+				displayFilteredItems(updatedUniqueAppliance, menuItemAppliance);
+
+				const updatedFilteredIngredients = updatedFilteredRecipes.reduce(
+					(acc, recipe) => {
+						return [
+							...acc,
+							...recipe.ingredients.map(ingredient =>
+								ingredient.ingredient.toLowerCase()
+							),
+						];
+					},
+					[]
+				);
+				const updatedUniqueIngredients = [
+					...new Set(updatedFilteredIngredients),
+				];
+				displayFilteredItems(updatedUniqueIngredients, menuItemIngredients);
 			}
 		});
 	});
 };
-const updateFilterUstensils = () => {
-	const inputUstensils = document.querySelector('.inputUstensils');
 
-	recipes.forEach(recipe => {
-		recipe.ustensils.forEach(ustensil => {
-			const menuUstensilsLi = document.createElement('li');
-			menuUstensilsLi.classList.add('menuUstensilsLi');
-			menuUstensilsLi.textContent = `${ustensil}`;
-			menuItemUstensils.appendChild(menuUstensilsLi);
-			tabUstensils.push(menuUstensilsLi.textContent);
-			menuUstensilsLi.addEventListener('click', handleClickUstensil);
-		});
-		// console.log('recipe.ustensils', recipe.ustensils);
-	});
-	inputUstensils.addEventListener('input', event => {
-		let value = event.target.value.trim().toLowerCase();
-		let inputFilterUstensils = tabUstensils.filter(item => {
-			return item.toLowerCase().includes(value);
-			// Ligne pour effacer ma liste et ensuite la mettre à jour
-		});
-		menuItemUstensils.innerHTML = '';
-		inputFilterUstensils = inputFilterUstensils.map(item => item.toLowerCase());
-		const uniqueUstensil = [...new Set(inputFilterUstensils)];
-		uniqueUstensil.forEach(item => {
-			let filteredListUstensils = document.createElement('li');
-			filteredListUstensils.classList.add('filteredListUstensils');
-			filteredListUstensils.textContent = item;
-			menuItemUstensils.appendChild(filteredListUstensils);
-
-			filteredListUstensils.addEventListener('click', handleClickUstensil);
-			// Filtrer et mettre à jour les ingrédients en fonction des ustensiles filtrés
-			const filteredRecipesByUstensils = recipes.filter(recipe => {
-				return recipe.ustensils.some(ustensil =>
-					uniqueUstensil.includes(ustensil.toLowerCase())
-				);
-			});
-			const filteredIngredientsByUstensils = filteredRecipesByUstensils.reduce(
-				(acc, recipe) => {
-					return [
-						...acc,
-						...recipe.ingredients.map(ingredient =>
-							ingredient.ingredient.toLowerCase()
-						),
-					];
-				},
-				[]
-			);
-			const uniqueIngredientsByUstensils = [
-				...new Set(filteredIngredientsByUstensils),
-			];
-			displayFilteredItems(uniqueIngredientsByUstensils, menuItemIngredients);
-
-			// Filtrer et mettre à jour les appareils en fonction des ustensiles filtrés
-			const filteredApplianceByUstensils = filteredRecipesByUstensils.map(
-				recipe => recipe.appliance
-			);
-			const uniqueApplianceByUstensils = [
-				...new Set(filteredApplianceByUstensils),
-			];
-			displayFilteredItems(uniqueApplianceByUstensils, menuItemAppliance);
-			updateFilteredRecipes();
-		});
-	});
-};
+// Appeler la fonction pour mettre à jour la liste des ustensiles
 updateFilterUstensils();
-
-// Fonction pour afficher une recette
 
 // Fonction pour récupérer les données
 async function fetchData() {
